@@ -1,11 +1,12 @@
+$(document).ready(function() {
+    console.log("JQ in action");
 
-$(document).ready(function(){
+    $('.taskForm').on('submit', function(event) {
+        event.preventDefault();
+        console.log("task ready to accept");
+    });
 
 
 
 
-
-
-
-  
-});
+}); //end doc ready

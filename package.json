@@ -1,0 +1,20 @@
+{
+  "name": "weekend_chal_3",
+  "version": "1.0.0",
+  "description": "Weekend Challenge 3",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aanisa/weekend_chal_3.git"
+  },
+  "author": "Anisa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aanisa/weekend_chal_3/issues"
+  },
+  "homepage": "https://github.com/aanisa/weekend_chal_3#readme"
+}
