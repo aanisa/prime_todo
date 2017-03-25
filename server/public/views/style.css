@@ -1,3 +1,28 @@
+
 h1 {
   text-align: center;
+  height: 100px;
+  background-color: cadetblue;
+  margin: 0px;
+}
+
+.taskForm {
+  background-color: azure;
+  height: 30px;
+  padding: 20px;
+}
+
+.formContainer {
+  width: 200px;
+  margin: auto;
+}
+
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+ul li:hover {
+  background: #ddd;
 }
