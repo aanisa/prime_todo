@@ -30,7 +30,7 @@ router.get('/', function(req, res) {
             });
         }
     });
-});
+});//end get
 
 
 router.post('/add', function(req, res) {
@@ -59,6 +59,34 @@ router.post('/add', function(req, res) {
                 });
         }
     });
-});
+});//end post
+
+
+router.put('/complete', function(req, res) {
+    console.log(req.body);
+    var status = req.body.status;
+    console.log(status);
+    res.send(status + 'ready to complete task');
+
+    // pool.connect(function(errorConnectingToDatabase, db, done) {
+    //     if (errorConnectingToDatabase) {
+    //         console.log("Error connecting to database!");
+    //         res.send(500);
+    //     } else {
+    //         db.query('INSERT INTO "tasks" ("task", "status")' +
+    //             'VALUES ($1, $2)',
+    //             [task, status],
+    //             function(queryError, result) {
+    //                 done();
+    //                 if (queryError) {
+    //                     console.log('Error making query!');
+    //                     res.send(500);
+    //                 } else {
+    //                     res.send(result.rows);
+    //                 }
+    //             });
+    //     }
+    // });
+});//end put
 
 module.exports = router;

@@ -8,9 +8,17 @@ $(document).ready(function() {
     addTaskButton();
 
     $('#newTask').on('click', '.complete', function() {
-        taskID = $(this).data('tasks');
+        taskID = $(this).data('tasks');           //accessing id of tasks from stashed data
         console.log(taskID);
 
+    $.ajax({
+      type: 'PUT',
+      url: '/tasks/complete',
+      data: {status: completedTask },
+      success: function(response) {
+        console.log(response);
+      }
+    });//end ajax
     }); //end complete button click
 
     $('#newTask').on('click', '.delete', function() {
