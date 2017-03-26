@@ -1,5 +1,5 @@
 var taskID = 0;
-var completedTask = true;
+
 
 $(document).ready(function() {
     console.log("JQ in action");
@@ -9,14 +9,16 @@ $(document).ready(function() {
 
     $('#newTask').on('click', '.complete', function() {
         taskID = $(this).data('tasks');           //accessing id of tasks from stashed data
-        console.log(taskID);
+        var completedStatus = true;
 
     $.ajax({
       type: 'PUT',
       url: '/tasks/complete',
-      data: {status: completedTask },
+      data: {status: completedStatus, id: taskID},
       success: function(response) {
         console.log(response);
+        console.log('hey');
+         getTasks();
       }
     });//end ajax
     }); //end complete button click
@@ -24,6 +26,16 @@ $(document).ready(function() {
     $('#newTask').on('click', '.delete', function() {
         taskID = $(this).data('tasks');
         console.log(taskID);
+
+        $.ajax({
+          type: 'DELETE',
+          url: '/tasks/delete' + taskID,
+          success: function(response) {
+            console.log(response);
+            console.log('deleting for sure');
+            //  getTasks();
+          }
+        });//end ajax
     }); //end complete button click
 
 

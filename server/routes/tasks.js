@@ -25,7 +25,7 @@ router.get('/', function(req, res) {
                     res.send(500);
                 } else {
                     res.send(result.rows);
-                    console.log(result.rows);
+                    // console.log(result.rows);
                 }
             });
         }
@@ -34,11 +34,11 @@ router.get('/', function(req, res) {
 
 
 router.post('/add', function(req, res) {
-    console.log(req.body);
+    // console.log(req.body);
     var task = req.body.task;
     var status = req.body.status;
-    console.log(task);
-    console.log(status);
+    // console.log(task);
+    // console.log(status);
 
     pool.connect(function(errorConnectingToDatabase, db, done) {
         if (errorConnectingToDatabase) {
@@ -64,29 +64,57 @@ router.post('/add', function(req, res) {
 
 router.put('/complete', function(req, res) {
     console.log(req.body);
+    var id = req.body.id;
     var status = req.body.status;
-    console.log(status);
-    res.send(status + 'ready to complete task');
 
-    // pool.connect(function(errorConnectingToDatabase, db, done) {
-    //     if (errorConnectingToDatabase) {
-    //         console.log("Error connecting to database!");
-    //         res.send(500);
-    //     } else {
-    //         db.query('INSERT INTO "tasks" ("task", "status")' +
-    //             'VALUES ($1, $2)',
-    //             [task, status],
-    //             function(queryError, result) {
-    //                 done();
-    //                 if (queryError) {
-    //                     console.log('Error making query!');
-    //                     res.send(500);
-    //                 } else {
-    //                     res.send(result.rows);
-    //                 }
-    //             });
-    //     }
-    // });
+    pool.connect(function(errorConnectingToDatabase, db, done) {
+        if (errorConnectingToDatabase) {
+            console.log("Error connecting to database!");
+            res.send(500);
+        } else {
+            db.query('UPDATE "tasks" SET "status" = $1 WHERE "id" = $2' +
+                'VALUES ($1, $2)',
+                [status, id],
+                function(queryError, result) {
+                    done();
+                    if (queryError) {
+                        console.log('Error making query!');
+                        res.send(500);
+                    } else {
+                        res.send(result.rows);
+                    }
+                });
+        }
+    });
 });//end put
+
+
+router.delete('/delete:id/', function(req, res) {
+    console.log(req.params);
+    var id = req.params.id;
+
+    pool.connect(function(errorConnectingToDatabase, db, done) {
+        if (errorConnectingToDatabase) {
+            console.log("Error connecting to database!");
+            res.send(500);
+        } else {
+            db.query('DELETE FROM "tasks" WHERE "id" = $1' +
+                'VALUES ($1)',
+                [id],
+                function(queryError, result) {
+                    done();
+                    if (queryError) {
+                        console.log('Error making query!');
+                        res.send(500);
+                    } else {
+                        res.send(result.rows);
+                    }
+                });
+        }
+    });
+});//end delete
+
+
+
 
 module.exports = router;
