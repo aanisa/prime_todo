@@ -16,8 +16,8 @@ $(document).ready(function() {
       url: '/tasks/complete',
       data: {status: completedStatus, id: taskID},
       success: function(response) {
-        console.log(response);
-        console.log('hey');
+        console.log('Completed');
+        $('li').addClass('colorChange');
          getTasks();
       }
     });//end ajax
@@ -47,13 +47,12 @@ function getTasks() {
         type: "GET",
         url: "/tasks",
         success: function(response) {
-            console.log(response);
             $('#newTask').empty();
             for (var i = 0; i < response.length; i++) {
                 var tasks = response[i];
                 $('#newTask').append('<li></li>');
                 var $el = $('#newTask').children().last();
-                $el.append('<li>' + tasks.task + tasks.status + '</li>' +
+                $el.append('<li>' + tasks.task + '</li>' +
                     '<button class="complete" data-tasks="' +
                     tasks.id + '">Complete</button>' +
                     '<button class="delete" data-tasks="' +
