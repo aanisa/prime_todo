@@ -5,3 +5,8 @@ CREATE TABLE "tasks" (
 	);
 
 ALTER TABLE "tasks" ADD "status" boolean;
+
+SELECT * FROM "tasks";
+
+INSERT INTO "tasks" (task, status)
+VALUES ('complete weekend challenge', 'no');

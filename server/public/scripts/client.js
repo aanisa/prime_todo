@@ -18,7 +18,9 @@ function getTasks() {
               var tasks = response[i];
               $('#newTask').append('<li></li>');
               var $el = $('#newTask').children().last();
-              $el.append('<li>' + tasks.task + tasks.status + '<button id="deleteButton">x</button>'+'</li>');
+              $el.append('<li>' + tasks.task + tasks.status +
+                  '<button id="completeButton">Complete</button>' +
+                  '<button id="deleteButton">Delete</button>' + '</li>');
           }
       }
   });
