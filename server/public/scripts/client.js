@@ -32,8 +32,7 @@ $(document).ready(function() {
           url: '/tasks/delete' + taskID,
           success: function(response) {
             console.log(response);
-            console.log('deleting for sure');
-            //  getTasks();
+             getTasks();
           }
         });//end ajax
     }); //end complete button click

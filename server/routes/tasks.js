@@ -90,16 +90,15 @@ router.put('/complete', function(req, res) {
 
 
 router.delete('/delete:id/', function(req, res) {
-    console.log(req.params);
     var id = req.params.id;
+    console.log("will delete task" + id);
 
     pool.connect(function(errorConnectingToDatabase, db, done) {
         if (errorConnectingToDatabase) {
             console.log("Error connecting to database!");
             res.send(500);
         } else {
-            db.query('DELETE FROM "tasks" WHERE "id" = $1' +
-                'VALUES ($1)',
+            db.query('DELETE FROM "tasks" WHERE "id" = $1',
                 [id],
                 function(queryError, result) {
                     done();
@@ -107,7 +106,7 @@ router.delete('/delete:id/', function(req, res) {
                         console.log('Error making query!');
                         res.send(500);
                     } else {
-                        res.send(result.rows);
+                        res.send('Task Deleted');
                     }
                 });
         }
