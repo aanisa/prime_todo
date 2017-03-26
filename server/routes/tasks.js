@@ -63,7 +63,6 @@ router.post('/add', function(req, res) {
 
 
 router.put('/complete', function(req, res) {
-    console.log(req.body);
     var id = req.body.id;
     var status = req.body.status;
 
@@ -72,8 +71,7 @@ router.put('/complete', function(req, res) {
             console.log("Error connecting to database!");
             res.send(500);
         } else {
-            db.query('UPDATE "tasks" SET "status" = $1 WHERE "id" = $2' +
-                'VALUES ($1, $2)',
+            db.query('UPDATE "tasks" SET "status" = $1 WHERE "id" = $2',
                 [status, id],
                 function(queryError, result) {
                     done();
