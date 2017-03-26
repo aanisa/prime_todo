@@ -1,8 +1,18 @@
 $(document).ready(function() {
     console.log("JQ in action");
 
-addTaskButton();
-getTasks();
+    getTasks();
+    addTaskButton();
+
+$('#newTask').on('click','.complete', function(){
+console.log('complete');
+});//end complete button click
+
+$('#newTask').on('click','.delete', function(){
+console.log('delete');
+});//end complete button click
+
+
 
 }); //end doc ready
 
@@ -18,12 +28,12 @@ function getTasks() {
               var tasks = response[i];
               $('#newTask').append('<li></li>');
               var $el = $('#newTask').children().last();
-              $el.append('<li>' + tasks.task + tasks.status +
-                  '<button id="completeButton">Complete</button>' +
-                  '<button id="deleteButton">Delete</button>' + '</li>');
+              $el.append('<li>' + tasks.task + tasks.status + '</li>' +
+                  '<button class="complete">Complete</button>' +
+                  '<button class="delete">Delete</button>');
           }
       }
-  });
+  });//end ajax request
 
 }//end function
 
@@ -36,9 +46,16 @@ function addTaskButton() {
       url: ('/tasks/add'),
       data: {task: $('#inputTask').val(), status: status},
       success: function(response) {
-          console.log(response);
           getTasks();
       }
   });//end ajax
   });//end taskForm jquery
 }//end function
+
+function completeTask() {
+
+}
+
+function deleteTask() {
+
+}
