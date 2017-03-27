@@ -26,6 +26,13 @@ function getTasks() {
                 $el.append(tasks.task +
                     '<button class="delete" data-tasks="'+tasks.id+'">Delete</button>' +
                     '<button class="complete" data-tasks="'+tasks.id+'">Complete</button>');
+
+                if (tasks.status === true) {
+                      console.log('its true');
+                      $('li').removeClass('item').addClass('colorChange');
+                    } else {
+
+                    }
             }
         }
     }); //end ajax request
