@@ -16,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/aanisa/weekend_chal_3/issues"
   },
-  "homepage": "https://github.com/aanisa/weekend_chal_3#readme"
+  "homepage": "https://github.com/aanisa/weekend_chal_3#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "jquery": "^3.2.1",
+    "pg": "^6.1.5"
+  }
 }
