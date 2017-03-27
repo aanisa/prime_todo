@@ -3,9 +3,9 @@ var taskID = 0;
 
 $(document).ready(function() {
     console.log("JQ in action");
-
-    getTasks();
     addTaskButton();
+    getTasks();
+
     deleteTask();
     completeTask();
 
@@ -26,11 +26,11 @@ function getTasks() {
                     '<button class="delete" data-tasks="' + tasks.id + '">Delete</button>' +
                     '<button class="complete" data-tasks="' + tasks.id + '">Complete</button>');
 
-                //if completed, change background color
-                // if (tasks.status === true) {
-                //     console.log(tasks.id);
-                //     $('li').addClass('colorChange');
-                //   }
+                // if completed, change background color
+                if (tasks.status === true) {
+                    console.log(tasks.id);
+                    $('li').last().addClass('colorChange');
+                }
             }
         }
     }); //end ajax request
@@ -49,11 +49,11 @@ function addTaskButton() {
                 status: status
             },
             success: function(response) {
-              console.log(response);
+                console.log(response);
                 getTasks();
             }
         }); //end ajax
-        $('#inputTask').val('');   //empty input field when submit new task
+        $('#inputTask').val(''); //empty input field when submit new task
     }); //end taskForm jquery
 } //end function
 
@@ -85,16 +85,18 @@ function deleteTask() {
     $('#newTask').on('click', '.delete', function() {
         taskID = $(this).data('tasks');
 
-        confirm("Are you sure you want to delete this task?");
+        //if confirm, run AJAX and delete task item. Don't need else statement because if cancel, will cancel
+        if (confirm("Are you sure you want to delete this task?")) {
+            $.ajax({
+                type: 'DELETE',
+                url: '/tasks/delete' + taskID,
+                success: function(response) {
+                    console.log(response);
 
-        $.ajax({
-            type: 'DELETE',
-            url: '/tasks/delete' + taskID,
-            success: function(response) {
-                console.log(response);
+                    getTasks();
+                }
+            }); //end ajax
 
-                getTasks();
-            }
-        }); //end ajax
+        }
     }); //end complete button click
 }
