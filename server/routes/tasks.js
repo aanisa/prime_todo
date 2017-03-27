@@ -53,8 +53,8 @@ router.post('/add', function(req, res) {
                         console.log('Error making query!');
                         res.send(500);
                     } else {
-                        res.send(result.rows);
-                        console.log(result.rows);
+                        res.send(200);
+                        // console.log(result.rows);  - empty array - coming back from response with nothing, because just put everything on the DOM, didn't sent a response back
                     }
                 });
         }
