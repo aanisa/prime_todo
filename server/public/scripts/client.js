@@ -6,38 +6,12 @@ $(document).ready(function() {
 
     getTasks();
     addTaskButton();
+    deleteTask();
+    completeTask();
 
-    $('#newTask').on('click', '.complete', function() {
-        taskID = $(this).data('tasks');           //accessing id of tasks from stashed data
-        var completedStatus = true;
-
-    $.ajax({
-      type: 'PUT',
-      url: '/tasks/complete',
-      data: {status: completedStatus, id: taskID},
-      success: function(response) {
-        console.log('Completed');
-        $('li').addClass('colorChange');
-         getTasks();
-      }
-    });//end ajax
-    }); //end complete button click
-
-    $('#newTask').on('click', '.delete', function() {
-        taskID = $(this).data('tasks');
-        console.log(taskID);
-
-        $.ajax({
-          type: 'DELETE',
-          url: '/tasks/delete' + taskID,
-          success: function(response) {
-            console.log(response);
-             getTasks();
-          }
-        });//end ajax
-    }); //end complete button click
-
-
+$('#newTask').on('click', '.complete', function(){
+  $('li').CSS('background-color', "yellow");
+});
 
 }); //end doc ready
 
@@ -52,15 +26,12 @@ function getTasks() {
                 var tasks = response[i];
                 $('#newTask').append('<li></li>');
                 var $el = $('#newTask').children().last();
-                $el.append('<li>' + tasks.task + '</li>' +
-                    '<button class="complete" data-tasks="' +
-                    tasks.id + '">Complete</button>' +
-                    '<button class="delete" data-tasks="' +
-                    tasks.id + '">Delete</button>');
+                $el.append(tasks.task +
+                    '<button class="delete" data-tasks="'+tasks.id+'">Delete</button>' +
+                    '<button class="complete" data-tasks="'+tasks.id+'">Complete</button>');
             }
         }
     }); //end ajax request
-
 } //end function
 
 function addTaskButton() {
@@ -81,10 +52,41 @@ function addTaskButton() {
     }); //end taskForm jquery
 } //end function
 
+
 function completeTask() {
+    $('#newTask').on('click', '.complete', function() {
+        taskID = $(this).data('tasks'); //accessing id of tasks from stashed data
+        var completedStatus = true;
+        $('li').addClass('colorChange');
+
+        $.ajax({
+            type: 'PUT',
+            url: '/tasks/complete',
+            data: {
+                status: completedStatus,
+                id: taskID
+            },
+            success: function(response) {
+                console.log('Completed');
+                getTasks();
+            }
+        }); //end ajax
+    }); //end complete button click
 
 }
 
 function deleteTask() {
+    $('#newTask').on('click', '.delete', function() {
+        taskID = $(this).data('tasks');
+        console.log(taskID);
 
+        $.ajax({
+            type: 'DELETE',
+            url: '/tasks/delete' + taskID,
+            success: function(response) {
+                console.log(response);
+                getTasks();
+            }
+        }); //end ajax
+    }); //end complete button click
 }
