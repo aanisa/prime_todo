@@ -9,9 +9,6 @@ $(document).ready(function() {
     deleteTask();
     completeTask();
 
-$('#newTask').on('click', '.complete', function(){
-  $('li').addClass('liii');
-});
 
 }); //end doc ready
 
@@ -24,7 +21,7 @@ function getTasks() {
             $('#newTask').empty();
             for (var i = 0; i < response.length; i++) {
                 var tasks = response[i];
-                $('#newTask').append('<li></li>');
+                $('#newTask').append('<li class="item"></li>');
                 var $el = $('#newTask').children().last();
                 $el.append(tasks.task +
                     '<button class="delete" data-tasks="'+tasks.id+'">Delete</button>' +
@@ -56,9 +53,9 @@ function addTaskButton() {
 
 function completeTask() {
     $('#newTask').on('click', '.complete', function() {
+
         taskID = $(this).data('tasks'); //accessing id of tasks from stashed data
         var completedStatus = true;
-        $('li').addClass('colorChange');
 
         $.ajax({
             type: 'PUT',
@@ -80,7 +77,7 @@ function deleteTask() {
     $('#newTask').on('click', '.delete', function() {
         taskID = $(this).data('tasks');
         console.log(taskID);
-        confirm("are you sure you want to delete");
+        confirm("Are you sure you want to delete this task?");
 
         $.ajax({
             type: 'DELETE',
