@@ -79,12 +79,14 @@ function deleteTask() {
     $('#newTask').on('click', '.delete', function() {
         taskID = $(this).data('tasks');
         console.log(taskID);
+        confirm("are you sure you want to delete");
 
         $.ajax({
             type: 'DELETE',
             url: '/tasks/delete' + taskID,
             success: function(response) {
                 console.log(response);
+
                 getTasks();
             }
         }); //end ajax
