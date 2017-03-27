@@ -1,7 +1,6 @@
 var taskID = 0;
 
 
-
 $(document).ready(function() {
     console.log("JQ in action");
 
@@ -9,8 +8,6 @@ $(document).ready(function() {
     addTaskButton();
     deleteTask();
     completeTask();
-
-
 
 }); //end doc ready
 
@@ -29,11 +26,11 @@ function getTasks() {
                     '<button class="delete" data-tasks="' + tasks.id + '">Delete</button>' +
                     '<button class="complete" data-tasks="' + tasks.id + '">Complete</button>');
 
-
-                if (tasks.status === true) {
-                    console.log(tasks.id);
-                    $('li').addClass('colorChange'); }
-
+                //if completed, change background color
+                // if (tasks.status === true) {
+                //     console.log(tasks.id);
+                //     $('li').addClass('colorChange');
+                //   }
             }
         }
     }); //end ajax request
@@ -43,6 +40,7 @@ function addTaskButton() {
     $('.taskForm').on('submit', function(event) {
         event.preventDefault();
         var status = false;
+
         $.ajax({
             type: "POST",
             url: ('/tasks/add'),
@@ -55,7 +53,7 @@ function addTaskButton() {
                 getTasks();
             }
         }); //end ajax
-        $('#inputTask').val('');
+        $('#inputTask').val('');   //empty input field when submit new task
     }); //end taskForm jquery
 } //end function
 
@@ -75,6 +73,7 @@ function completeTask() {
             },
             success: function(response) {
                 console.log('Completed');
+                console.log(response);
                 getTasks();
             }
         }); //end ajax
@@ -85,7 +84,7 @@ function completeTask() {
 function deleteTask() {
     $('#newTask').on('click', '.delete', function() {
         taskID = $(this).data('tasks');
-        console.log(taskID);
+
         confirm("Are you sure you want to delete this task?");
 
         $.ajax({
