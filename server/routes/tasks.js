@@ -37,17 +37,16 @@ router.post('/add', function(req, res) {
     // console.log(req.body);
     var task = req.body.task;
     var status = req.body.status;
-    // console.log(task);
-    // console.log(status);
+    console.log(task);
+    console.log(status);
 
     pool.connect(function(errorConnectingToDatabase, db, done) {
         if (errorConnectingToDatabase) {
             console.log("Error connecting to database!");
             res.send(500);
         } else {
-            db.query('INSERT INTO "tasks" ("task", "status")' +
-                'VALUES ($1, $2)',
-                [task, status],
+            db.query('INSERT INTO "tasks" ("task", "status") VALUES ($1, $2)',
+                [req.body.task, false],
                 function(queryError, result) {
                     done();
                     if (queryError) {
@@ -55,6 +54,7 @@ router.post('/add', function(req, res) {
                         res.send(500);
                     } else {
                         res.send(result.rows);
+                        console.log(result.rows);
                     }
                 });
         }

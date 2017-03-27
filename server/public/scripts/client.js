@@ -1,6 +1,7 @@
 var taskID = 0;
 
 
+
 $(document).ready(function() {
     console.log("JQ in action");
 
@@ -8,6 +9,7 @@ $(document).ready(function() {
     addTaskButton();
     deleteTask();
     completeTask();
+
 
 
 }); //end doc ready
@@ -21,18 +23,17 @@ function getTasks() {
             $('#newTask').empty();
             for (var i = 0; i < response.length; i++) {
                 var tasks = response[i];
-                $('#newTask').append('<li class="item"></li>');
+                $('#newTask').append('<li></li>');
                 var $el = $('#newTask').children().last();
                 $el.append(tasks.task +
-                    '<button class="delete" data-tasks="'+tasks.id+'">Delete</button>' +
-                    '<button class="complete" data-tasks="'+tasks.id+'">Complete</button>');
+                    '<button class="delete" data-tasks="' + tasks.id + '">Delete</button>' +
+                    '<button class="complete" data-tasks="' + tasks.id + '">Complete</button>');
+
 
                 if (tasks.status === true) {
-                      console.log('its true');
-                      $('li').removeClass('item').addClass('colorChange');
-                    } else {
+                    console.log(tasks.id);
+                    $('li').addClass('colorChange'); }
 
-                    }
             }
         }
     }); //end ajax request
@@ -50,6 +51,7 @@ function addTaskButton() {
                 status: status
             },
             success: function(response) {
+              console.log(response);
                 getTasks();
             }
         }); //end ajax
