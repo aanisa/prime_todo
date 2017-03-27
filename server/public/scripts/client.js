@@ -49,6 +49,7 @@ function addTaskButton() {
                 getTasks();
             }
         }); //end ajax
+        $('#inputTask').val('');
     }); //end taskForm jquery
 } //end function
 
