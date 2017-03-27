@@ -10,7 +10,7 @@ $(document).ready(function() {
     completeTask();
 
 $('#newTask').on('click', '.complete', function(){
-  $('li').CSS('background-color', "yellow");
+  $('li').addClass('liii');
 });
 
 }); //end doc ready

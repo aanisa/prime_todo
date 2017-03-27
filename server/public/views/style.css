@@ -42,6 +42,8 @@ ul li:hover {
 
 li{
   background-color: linen;
+  margin-top: 2px;
+  padding: 3px;
 
 }
 .colorChange {
