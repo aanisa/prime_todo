@@ -17,8 +17,8 @@ router.get('/', function(req, res) {
         if (errorConnectingToDatabase) {
             console.log("Error connecting to database!");
             res.send(500);
-        } else {
-            db.query('SELECT * FROM "tasks" ORDER BY "id" DESC', function(queryError, result) {
+        } else {                         //places completed task in bottom
+            db.query('SELECT * FROM "tasks" ORDER BY status ASC', function(queryError, result) {
                 done();
                 if (queryError) {
                     console.log('Error making query!');
@@ -46,7 +46,7 @@ router.post('/add', function(req, res) {
             res.send(500);
         } else {
             db.query('INSERT INTO "tasks" ("task", "status") VALUES ($1, $2)',
-                [req.body.task, false],
+                [task, status],
                 function(queryError, result) {
                     done();
                     if (queryError) {
@@ -80,6 +80,7 @@ router.put('/complete', function(req, res) {
                         res.send(500);
                     } else {
                         res.send(result.rows);
+                        console.log(result.rows);
                     }
                 });
         }
@@ -89,7 +90,7 @@ router.put('/complete', function(req, res) {
 
 router.delete('/delete:id/', function(req, res) {
     var id = req.params.id;
-    console.log("will delete task" + id);
+    console.log("TASK " + id + " DELETED");
 
     pool.connect(function(errorConnectingToDatabase, db, done) {
         if (errorConnectingToDatabase) {
@@ -104,7 +105,7 @@ router.delete('/delete:id/', function(req, res) {
                         console.log('Error making query!');
                         res.send(500);
                     } else {
-                        res.send('Task Deleted');
+                        res.send("TASK " + id + " DELETED");
                     }
                 });
         }
