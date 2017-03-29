@@ -20,16 +20,16 @@ function getTasks() {
             $('#newTask').empty();
             for (var i = 0; i < response.length; i++) {
                 var tasks = response[i];
-                $('#newTask').append('<li></li>');
+                $('#newTask').append('<li><div class="newListItem></div>"</li>');
                 var $el = $('#newTask').children().last();
-                $el.append('<span>' + tasks.task +
-                    '<button class="delete btn btn-default" data-tasks="' + tasks.id + '">Delete</button>' +
-                    '<button class="complete btn btn-default" data-tasks="' + tasks.id + '">Complete</button>' +'</span>');
+                $el.append('<p class="col-md-10">' + tasks.task + '</p>' +
+                    '<span class="col-md-1"><button class="complete btn btn-default" data-tasks="' + tasks.id + '"><span class="glyphicon glyphicon-ok"></span></button></span>' +
+                    '<span class="col-md-1"><button class="delete btn btn-default" data-tasks="' + tasks.id + '"><span class="glyphicon glyphicon-remove"></span></button></span>');
 
                 // if completed, change background color
                 if (tasks.status === true) {
                     console.log(tasks.id);
-                    $('li').last().addClass('colorChange');
+                    $('.newListItem').last().addClass('colorChange');
                 }
             }
         }
