@@ -22,9 +22,9 @@ function getTasks() {
                 var tasks = response[i];
                 $('#newTask').append('<li></li>');
                 var $el = $('#newTask').children().last();
-                $el.append(tasks.task +
-                    '<button class="delete" data-tasks="' + tasks.id + '">Delete</button>' +
-                    '<button class="complete" data-tasks="' + tasks.id + '">Complete</button>');
+                $el.append('<span>' + tasks.task +
+                    '<button class="delete btn btn-default" data-tasks="' + tasks.id + '">Delete</button>' +
+                    '<button class="complete btn btn-default" data-tasks="' + tasks.id + '">Complete</button>' +'</span>');
 
                 // if completed, change background color
                 if (tasks.status === true) {
